@@ -36,17 +36,16 @@ class reflection_analysis:
         '''
         tmp_array = []
         for i in range(r):
-            row = self.get_row(data, i, i+1)
-            clean = self.clean_data_row(row)
-            tmp_array.append(clean)
+            time, row = self.get_row_of_data(i, data)
+            tmp_array.append([time, row])
         return tmp_array
 
     def get_row_of_data(self, row_number, data_set):
         # Get a specific row in the data set. Parameters: dataset, row_start, row_end
         row = self.get_row(data_set, row_number, row_number+1)
         clean = self.clean_data_row(row)
-        filter = self.smooth_data(clean)
-        return filter
+        filter = self.smooth_data(clean[1])
+        return [clean[0], filter]
     
     def get_row(self, data, start_row, stop_row):
         '''
@@ -72,10 +71,14 @@ class reflection_analysis:
             
             Returns:    clean_data: The cleaned up data.
         '''
-        clean_data = []
+        clean_data = [] 
+        for k in range(2):
+            clean_data.append([])
+
+        clean_data[0] = data[0]
         for i in range(1,len(data)): 
             if not math.isnan(data[i]):
-                clean_data.append(int(data[i]))
+                clean_data[1].append(int(data[i]))
         return clean_data
 
     def smooth_data(self, data):
@@ -135,7 +138,7 @@ class reflection_analysis:
         x_2 = np.arange(len(data))
         plt.barh(x_2, data)
         plt.ylabel("Columns from csv", fontsize=20)
-        plt.xlabel("Recieved reflection strength", fontsize=20)
+        plt.xlabel("Recieved reflection intensity", fontsize=20)
         ax = plt.gca()
         ax.invert_yaxis()
         plt.show() 

@@ -21,20 +21,7 @@ path_narrow = r"C:\Users\bjorn\Desktop\sonar\data\engelsviken_marine_11_03_2022\
 path_mid = r"C:\Users\bjorn\Desktop\sonar\data\engelsviken_marine_11_03_2022\test_mid_sonar_data.csv"
 path_wide = r"C:\Users\bjorn\Desktop\sonar\data\engelsviken_marine_11_03_2022\test_wide_sonar_data.csv"
 
-# Narrow frequency band data
-#df_narrow = pd.read_csv(path_narrow, delimiter=",")
-#data_narrow = df_narrow[["time", "depth", "latitude", "longtitude"]]
-#cleaned_narrow = clean_row(data_narrow, "latitude")
-
-# Mid frequency band data
-#df_mid = pd.read_csv(path_mid, delimiter=",")
-#data_mid = df_mid[["time", "depth", "latitude", "longtitude"]]
-#cleaned_mid = clean_row(data_mid, "latitude")
-
-# Wide frequency band data
-#df_wide = pd.read_csv(path_wide, delimiter=",")
-#data_wide = df_wide[["time", "depth", "latitude", "longtitude"]]
-#cleaned_wide = clean_row(data_wide, "latitude")
+# Loading data
 ua = udp_analysis()
 cleaned_narrow = ua.get_data(path_narrow)
 cleaned_mid = ua.get_data(path_mid)
@@ -89,9 +76,7 @@ npNarrow = np.array(narrow_plot)
 npMid = np.array(mid_plot)
 npWide = np.array(wide_plot)
 width = 0.30
-#plt.style.use('dark_background')
 fig, ax = plt.subplots()
-#ax.set_facecolor("grey")
 ax.bar(x-0.3, npNarrow, color="#BDCCE4", width=0.30, label="Narrow") 
 ax.bar(x, npMid, color="#6488BF", width=0.30, label="Mid")  
 ax.bar(x+0.3, npWide, color="#2255A4", width=0.30, label="Wide")  
