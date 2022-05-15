@@ -1,8 +1,6 @@
 from math import radians, cos, sin, asin, sqrt
+
 def distance(lat1, lat2, lon1, lon2):
-     
-    # The math module contains a function named
-    # radians which converts from degrees to radians.
     lon1 = radians(lon1)
     lon2 = radians(lon2)
     lat1 = radians(lat1)
